@@ -1,3 +1,9 @@
+# Postorder traversal
+
+https://youtu.be/xLQKdq0Ffjg
+
+注意最後那個 while
+
 ```py
 class Solution(object):
     def postOrder(self, node, res):
@@ -18,28 +24,23 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
-        if root is None:
-            return []
-
         res = []
         stack = []
-        prev = None
-        stack.append(root)
-        while stack:
-            node = stack[-1]  # peek
+        current = root
 
-            if prev is None or prev.left == node or prev.right == node:
-                if node.left is not None:
-                    stack.append(node.left)
-                elif node.right is not None:
-                    stack.append(node.right)
-            elif prev == node.left:
-                if node.right is not None:
-                    stack.append(node.right)
+        while stack or current:
+            if current is not None:
+                stack.append(current)
+                current = current.left
             else:
-                res.append(node.val)
-                stack.pop()
-            prev = node
+                node = stack[-1] # peak
 
-        return res
+                if node.right is not None:
+                    current = node.right
+                else:
+                    node = stack.pop()
+                    res.append(node.val)
+                    while stack and node == stack[-1].right:
+                        node = stack.pop()
+                        res.append(node.val)
 ```
