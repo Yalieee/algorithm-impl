@@ -1,6 +1,19 @@
 # Concept
 一直找到一個沒有 Left child 的節點，接著將他自己加到結果中，再從他的右邊繼續
 
+詳細步驟
+1. Create an empty stack S.
+2. Initialize current node as root
+3. Push the current node to S and set current = current->left until current is NULL
+4. If current is NULL and stack is not empty then
+    - Pop the top item from stack.
+    - Print the popped item, set current = popped_item->right
+    - Go to step 3.
+5. If current is NULL and stack is empty then we are done.
+
+Ref
+- https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/
+
 ```py
 # Definition for a binary tree node.
 # class TreeNode(object):
